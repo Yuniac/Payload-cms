@@ -11,6 +11,8 @@ import Users from "./collections/Users";
 import Study from "./collections/study/Study";
 import Category from "./collections/category/Category";
 import Media from "./collections/media/Media";
+import MegaMenu from "./globals/MegaMenu";
+import Page from "./collections/page/Page";
 
 export default buildConfig({
   admin: {
@@ -18,15 +20,8 @@ export default buildConfig({
     bundler: webpackBundler(),
   },
   editor: slateEditor({}),
-  collections: [Users, Study, Category, FormSubmission, Media],
-  typescript: {
-    outputFile: path.resolve(__dirname, "payload-types.ts"),
-  },
-  graphQL: {
-    schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
-  },
-  plugins: [payloadCloud()],
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI,
-  }),
+  collections: [Users, Page, Study, Category, FormSubmission, Media],
+  typescript: { outputFile: path.resolve(__dirname, "payload-types.ts") },
+  db: mongooseAdapter({ url: process.env.DATABASE_URI }),
+  globals: [MegaMenu],
 });
